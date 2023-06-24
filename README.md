@@ -1,36 +1,37 @@
-GitHub Page: Pup Inflation Analyzer: Analyzing @dog_rates Tweets
+# Pup Inflation: Analyzing Tweets
 
-**Introduction:**
-Welcome to the "Pup Inflation Analyzer: Analyzing @dog_rates Tweets" GitHub repository. This project aims to investigate grade inflation on the popular @dog_rates Twitter account, which rates the cuteness of users' dog pictures. We will analyze the provided dataset of tweets, perform data processing and visualization tasks, and calculate a best-fit line to understand trends and potential inflation in the ratings.
+## Problem Statement
 
-**Instructions:**
-To access and run the analysis notebook, please follow these steps:
+The goal of this analysis is to determine if there has been grade inflation on the @dog_rates Twitter account, which rates the cuteness of users' dog pictures. We will analyze the data collected from the @dog_rates feed to investigate if there has been a significant increase in the ratings given to the dog pictures over time.
 
-1. Clone the repository: Start by cloning the repository to your local machine using the following command:
-```
-git clone https://github.com/jaisreet/pup-inflation-analyzer.git
-```
+## Approach and Methods
 
-2. Navigate to the project directory: Move into the project directory using the command:
-```
-cd pup-inflation-analyzer
-```
+1. **Data Loading and Preparation**
 
-3. Open the Jupyter Notebook: Launch the Jupyter Notebook server by running the following command in the project directory:
-```
-jupyter notebook
-```
-This will open a browser window with the Jupyter Notebook interface.
+   - Load the data from the provided CSV file, "dog_rates_tweets.csv", into a DataFrame using Pandas.
+   - Identify tweets that contain a rating by searching for ratings in the form of "X/10" and extract the numeric rating values.
+   - Exclude tweets that do not contain a rating to focus only on the rating data.
+   - Remove outliers by excluding rating values that are unrealistically large, such as ratings larger than 25/10.
+   - Convert the "created_at" column to a datetime value if it is stored as a string. This can be done by using the `pd.to_datetime` function or specifying the `parse_dates` argument while loading the CSV file.
 
-4. Access the analysis notebook: In the Jupyter Notebook interface, click on the "pup-inflation-analyzer.ipynb" notebook to open and run it.
+2. **Data Visualization**
 
-5. Follow the instructions in the notebook: The notebook contains step-by-step instructions to perform the analysis. Execute each cell to load the data, process it, visualize the results, and calculate the best-fit line using linear regression.
+   - Create a scatter plot of the date versus the rating to visualize the distribution of ratings over time.
+   - This plot will provide an overview of the data and help identify any trends or patterns in the ratings.
 
-6. View the results: The notebook will generate scatter plots, provide information about the dataset, display the slope and intercept of the best-fit line, and produce a scatter plot with the fitted line. The results will be shown within the notebook.
+3. **Linear Fitting**
 
-**Additional Information:**
-- The notebook utilizes pandas, matplotlib, and scipy libraries for data manipulation, visualization, and linear regression.
-- Ensure that the "dog_rates_tweets.csv" file is present in the same directory as the notebook.
-- Make sure to save and run the notebook completely to view the results accurately.
+   - Perform a linear regression analysis on the data to determine if there is a best-fit line that represents the overall trend in the ratings.
+   - Use the `scipy.stats.linregress` function to calculate the slope and intercept of the best-fit line.
+   - To perform the linear regression, convert the datetime values in the "created_at" column to timestamps using a custom function `to_timestamp`.
+   - Apply the `to_timestamp` function to the "created_at" column either using the `apply` method or by directly passing the column to the function.
+   - Calculate the linear regression parameters and obtain the slope and intercept for the best-fit line.
 
-For detailed code implementation and analysis, please refer to the [GitHub repository](https://github.com/jaisreet/pup-inflation-analyzer).
+4. **Analysis and Conclusion**
+
+   - Analyze the slope of the best-fit line to determine if there is evidence of grade inflation over time.
+   - If the slope is significantly positive, it suggests that there has been an increase in the ratings given to the dog pictures over time, indicating grade inflation.
+   - If the slope is close to zero or negative, it suggests that there has not been a significant increase in the ratings, indicating no grade inflation.
+   - Draw conclusions based on the analysis and present the findings in a clear and concise manner.
+
+The analysis is conducted in a Jupyter notebook named "dog-rates.ipynb". The notebook loads the data from the provided CSV file, performs the necessary data preparation steps, visualizes the data using scatter plots, and conducts a linear regression analysis to determine the presence of grade inflation. The conclusions are presented based on the analysis conducted.
